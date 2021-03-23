@@ -26,7 +26,6 @@ const datepicker = new Datepicker({
   elementEnd: endDate,
   parentEl: parentElement
 });
-datepicker.start();
 ```
 
 `element` is a DOM node that is used to represent the start date
