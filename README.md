@@ -88,6 +88,28 @@ For a full list of methods that are available, please visit the [Methods page](h
 
 ### Events
 
+With the addition of the sidebar containing predefined dates there is an additional event that is available to you in order to determine which `timescale` has been selected.
+
+The `timescale` in the example below refers to the data attribute also named timescale which is will be one of the following:
+
+- last_30_days
+- this_month
+- last_month
+- last_3_months
+- last_6_months
+- this_year
+- last_year
+- all_time (TODO: Still to be determined when this time period will begin)
+
+**Example**
+
+```
+picker.on("predefined:selected", (timescale) => {
+  // do something with the timescale
+  callFunc(timescale);
+}
+```
+
 For a full list of methods that are available, please visit the [Events page](https://litepicker.com/docs/events)
 
 ### Customise
