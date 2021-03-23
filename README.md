@@ -15,7 +15,7 @@ This datepicker is using the brilliant [Litepicker](https://litepicker.com/) as 
 You can import the datepicker into your project by importing the package into your relevant js file
 
 ```
-import Datepicker from 'datepicker-ce';
+import Datepicker from 'krystal-datepicker';
 ```
 
 In order to initialise the datepicker you would then call it by using
