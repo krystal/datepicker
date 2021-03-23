@@ -42,51 +42,7 @@ export default class Datepicker extends Litepicker {
       closeOnEscape: true,
       ...options,
     };
-  }
-
-  start() {
-    // Position the datepicker to the extreme right of the parent element
-    if (this.defaultOptions.position === "right") {
-      this.ui.classList.add("litepicker--right");
-    }
-
-    // Close the datepicker if the user presses the 'Escape' key
-    if (this.defaultOptions.closeOnEscape) {
-      this.closeOnEscape(this);
-    }
-
-    // If true, the user will be able to open the datepicker by clicking on the calendar icon
-    if (this.defaultOptions.openOnIconClick) {
-      this.openOnIconClick(this);
-    }
-
-    this.on("show", (el) => {
-      this.options.parentEl.classList.add("input-backdrop");
-      // If no element (el) exists when we click e.g. when the calendar icon is selected, we immediately bail
-      // and return
-      if (!el) return;
-
-      // If we select the endDate element, allow the user to 'repick' the last date instead of setting two
-      // dates again
-      if (el.classList.contains("datepicker-end")) {
-        this.setOptions({
-          allowRepick: true,
-        });
-      }
-    });
-
-    // When we hide the datepicker, set the initial state back to being able to pick two dates simultaneously
-    this.on("hide", () => {
-      this.options.parentEl.classList.remove("input-backdrop");
-      this.setOptions({
-        allowRepick: false,
-      });
-    });
-
-    // Attach our sidebar of pre-defined dates to the ui of the original datepicker
-    this.on("render", (ui) => {
-      this.createDateRangeSidebar(ui);
-    });
+    this.start();
   }
 
   createDateRangeSidebar(datepicker) {
@@ -361,6 +317,51 @@ export default class Datepicker extends Litepicker {
     document.addEventListener("click", (event) => {
       if (!event.target.classList.contains("js-show-calendar")) return;
       picker.show();
+    });
+  }
+
+  start() {
+    // Position the datepicker to the extreme right of the parent element
+    if (this.defaultOptions.position === "right") {
+      this.ui.classList.add("litepicker--right");
+    }
+
+    // Close the datepicker if the user presses the 'Escape' key
+    if (this.defaultOptions.closeOnEscape) {
+      this.closeOnEscape(this);
+    }
+
+    // If true, the user will be able to open the datepicker by clicking on the calendar icon
+    if (this.defaultOptions.openOnIconClick) {
+      this.openOnIconClick(this);
+    }
+
+    this.on("show", (el) => {
+      this.options.parentEl.classList.add("input-backdrop");
+      // If no element (el) exists when we click e.g. when the calendar icon is selected, we immediately bail
+      // and return
+      if (!el) return;
+
+      // If we select the endDate element, allow the user to 'repick' the last date instead of setting two
+      // dates again
+      if (el.classList.contains("datepicker-end")) {
+        this.setOptions({
+          allowRepick: true,
+        });
+      }
+    });
+
+    // When we hide the datepicker, set the initial state back to being able to pick two dates simultaneously
+    this.on("hide", () => {
+      this.options.parentEl.classList.remove("input-backdrop");
+      this.setOptions({
+        allowRepick: false,
+      });
+    });
+
+    // Attach our sidebar of pre-defined dates to the ui of the original datepicker
+    this.on("render", (ui) => {
+      this.createDateRangeSidebar(ui);
     });
   }
 }
