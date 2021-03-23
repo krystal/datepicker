@@ -18,10 +18,10 @@
   ],
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/krystal/graphene.git"
+    "url": "https://github.com/krystal/datepicker"
   },
   "bugs": {
-    "url": "https://github.com/krystal/graphene/issues"
+    "url": "https://github.com/krystal/datepicker/issues"
   },
   "devDependencies": {
     "@babel/cli": "^7.13.10",
@@ -39,5 +39,5 @@
     "webpack-cli": "^4.5.0",
     "webpack-dev-server": "^3.11.2"
   },
-  "homepage": "https://github.com/krystal/graphene#readme"
+  "homepage": "https://github.com/krystal/datepicker#readme"
 }
