@@ -257,6 +257,8 @@ export default class Datepicker extends Litepicker {
             displayPreviousYear(this);
             break;
         }
+        // this.preDefinedSelected(timescale);
+        this.emit("predefined:selected", timescale);
 
         // Hide the datepicker after we select a pre-defined period
         this.hide();
