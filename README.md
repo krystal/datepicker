@@ -38,7 +38,7 @@ datepicker.start();
 You can then import the css file into your project
 
 ```
-@import "datepicker-ce/dist/main.css"
+@import "krystal-datepicker/dist/main.css"
 ```
 
 The HTML must follow this structure
