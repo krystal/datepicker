@@ -1,6 +1,6 @@
 {
   "name": "krystal-datepicker",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "A datepicker with an additional sidebar for pre-defined time periods",
   "main": "./dist/main.js",
   "scripts": {

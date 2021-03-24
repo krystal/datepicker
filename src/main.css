@@ -291,7 +291,6 @@
 }
 
 .icon--calendar {
-  color: var(--calendar-icon-color);
   cursor: pointer;
   height: 24px;
   margin-right: 8px;
