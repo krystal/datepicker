@@ -1,4 +1,4 @@
-import Litepicker from "litepicker/dist/nocss/litepicker.umd.js";
+import Litepicker from 'litepicker/dist/nocss/litepicker.umd.js';
 import {
   display30DayRange,
   displayCurrentMonth,
@@ -7,9 +7,9 @@ import {
   displayPreviousThreeMonths,
   displayPreviousYear,
   displayThisYear,
-} from "./utils/date-ranges";
-import { debounce } from "./utils/helpers";
-import "./main.css";
+} from './utils/date-ranges';
+import { debounce } from './utils/helpers';
+import './main.css';
 
 let today = new Date();
 
@@ -21,7 +21,7 @@ const defaults = {
       '<svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24" width="24px" fill="#000000"><path d="M0 0h24v24H0V0z" fill="none"/><path d="M10.02 6L8.61 7.41 13.19 12l-4.58 4.59L10.02 18l6-6-6-6z"/></svg>',
   },
   singleMode: false,
-  format: "MMM D, YYYY",
+  format: 'MMM D, YYYY',
   showTooltip: false,
   startDate: new Date().setDate(today.getDate() - 30),
   endDate: new Date(),
@@ -46,7 +46,7 @@ export default class Datepicker extends Litepicker {
   }
 
   createDateRangeSidebar(datepicker) {
-    const calendar = datepicker.querySelector(".container__months");
+    const calendar = datepicker.querySelector('.container__months');
 
     // Create the sidebar as a template literal
     const sidebar = `
@@ -78,20 +78,20 @@ export default class Datepicker extends Litepicker {
       </ul>
     `;
 
-    const datepickerContainer = datepicker.querySelector(".container__main");
+    const datepickerContainer = datepicker.querySelector('.container__main');
 
     // Add an id and role="tabpanel" to the months container
-    calendar.id = "choose";
-    calendar.setAttribute("role", "tabpanel");
+    calendar.id = 'choose';
+    calendar.setAttribute('role', 'tabpanel');
 
     // Add the new sidebar to the datepicker
-    datepickerContainer.insertAdjacentHTML("afterbegin", sidebar);
+    datepickerContainer.insertAdjacentHTML('afterbegin', sidebar);
 
     // After adding the sidebar to the DOM, select all the buttons
     const timescaleButtons = Array.from(
-      document.querySelectorAll(".pre-defined-item button")
+      document.querySelectorAll('.pre-defined-item button')
     );
-    const preDefinedDates = document.querySelector(".pre-defined-dates");
+    const preDefinedDates = document.querySelector('.pre-defined-dates');
 
     // Attach event listeners to all buttons
     this.addButtonEventListeners(timescaleButtons);
@@ -102,8 +102,8 @@ export default class Datepicker extends Litepicker {
     }
     const resizeListener = debounce(() => {
       if (window.innerWidth > 800) {
-        calendar.classList.remove("u-visually-hidden");
-        preDefinedDates.classList.remove("u-visually-hidden");
+        calendar.classList.remove('u-visually-hidden');
+        preDefinedDates.classList.remove('u-visually-hidden');
       } else {
         if (this.tabState.isCustomRangeOpen) {
           this.showCalendar(preDefinedDates, calendar);
@@ -113,13 +113,13 @@ export default class Datepicker extends Litepicker {
       }
     }, 100);
 
-    window.addEventListener("resize", resizeListener);
+    window.addEventListener('resize', resizeListener);
   }
 
   createMobileTabbedNav(datepicker, calendar) {
-    const preDefinedDates = document.querySelector(".pre-defined-dates");
-    const datepickerContainer = datepicker.querySelector(".container__main");
-    const panels = document.querySelectorAll("[role=tabpanel]");
+    const preDefinedDates = document.querySelector('.pre-defined-dates');
+    const datepickerContainer = datepicker.querySelector('.container__main');
+    const panels = document.querySelectorAll('[role=tabpanel]');
 
     // Create a template literal for our tabbed navigation
     const mobileTabbedNav = `
@@ -134,18 +134,18 @@ export default class Datepicker extends Litepicker {
     `;
 
     // Insert the tabbed navigation into the DOM and attach it to our datepicker
-    datepickerContainer.insertAdjacentHTML("beforebegin", mobileTabbedNav);
+    datepickerContainer.insertAdjacentHTML('beforebegin', mobileTabbedNav);
 
     // As we are hiding the calendar by default on smaller screens, we can comfortably hide the
     // calendar visually now
-    calendar.classList.add("u-visually-hidden");
+    calendar.classList.add('u-visually-hidden');
 
     const customDateTab = datepicker.querySelector('[data-type="choose"]');
 
     // After we create the tabbed navigation, we can grab all the links inside it and turn it into
     // an array
     const datePickerLinks = Array.from(
-      document.querySelectorAll(".datepicker-tabs__link")
+      document.querySelectorAll('.datepicker-tabs__link')
     );
 
     // Determine which tab to show based on the current state
@@ -162,7 +162,7 @@ export default class Datepicker extends Litepicker {
    */
   showChosenTab(datePickerLinks, panels, datepicker) {
     datePickerLinks.forEach((item) => {
-      item.addEventListener("click", (e) => {
+      item.addEventListener('click', (e) => {
         e.preventDefault();
         this.hideAllPanels(panels);
         this.removeActiveState(datePickerLinks);
@@ -170,8 +170,8 @@ export default class Datepicker extends Litepicker {
         const target = e.target;
         const tabTarget = target.dataset.type;
         const elToShow = datepicker.querySelector(`#${tabTarget}`);
-        target.classList.add("active");
-        elToShow.classList.remove("u-visually-hidden");
+        target.classList.add('active');
+        elToShow.classList.remove('u-visually-hidden');
         this.updateTabState(tabTarget);
       });
     });
@@ -183,38 +183,42 @@ export default class Datepicker extends Litepicker {
    */
   addButtonEventListeners(timescaleButtons) {
     timescaleButtons.forEach((button) => {
-      button.addEventListener("click", (e) => {
+      button.addEventListener('click', (e) => {
         const timescale = e.target.dataset.timescale;
 
         switch (timescale) {
-          case "last_30_days":
+          case 'last_30_days':
             display30DayRange(this);
             break;
-          case "this_month":
+          case 'this_month':
             displayCurrentMonth(this);
             break;
-          case "last_month":
+          case 'last_month':
             displayPreviousMonth(this);
             break;
-          case "last_3_months":
+          case 'last_3_months':
             displayPreviousThreeMonths(this);
             break;
-          case "last_6_months":
+          case 'last_6_months':
             displayPreviousSixMonths(this);
             break;
-          case "this_year":
+          case 'this_year':
             displayThisYear(this);
             break;
-          case "last_year":
+          case 'last_year':
             displayPreviousYear(this);
             break;
-          case "all_time":
+          case 'all_time':
             // TODO: update to display data from 'all time'
             displayPreviousYear(this);
             break;
         }
-        // this.preDefinedSelected(timescale);
-        this.emit("predefined:selected", timescale);
+
+        const startDate = picker
+          .getStartDate()
+          .dateInstance.toLocaleDateString();
+        const endDate = picker.getEndDate().dateInstance.toLocaleDateString();
+        this.emit('predefined:selected', timescale, startDate, endDate);
 
         // Hide the datepicker after we select a pre-defined period
         this.hide();
@@ -227,8 +231,8 @@ export default class Datepicker extends Litepicker {
    * @param  {String} tabTarget The data attribute of the chosen tab
    */
   showCalendar(preDefinedDates, calendar) {
-    calendar.classList.remove("u-visually-hidden");
-    preDefinedDates.classList.add("u-visually-hidden");
+    calendar.classList.remove('u-visually-hidden');
+    preDefinedDates.classList.add('u-visually-hidden');
   }
 
   /**
@@ -236,8 +240,8 @@ export default class Datepicker extends Litepicker {
    * @param  {String} tabTarget The data attribute of the chosen tab
    */
   showPredefinedDates(preDefinedDates, calendar) {
-    calendar.classList.add("u-visually-hidden");
-    preDefinedDates.classList.remove("u-visually-hidden");
+    calendar.classList.add('u-visually-hidden');
+    preDefinedDates.classList.remove('u-visually-hidden');
   }
 
   /**
@@ -245,7 +249,7 @@ export default class Datepicker extends Litepicker {
    * @param  {String} tabTarget The data attribute of the chosen tab
    */
   updateTabState(tabTarget) {
-    if (tabTarget === "choose") {
+    if (tabTarget === 'choose') {
       this.tabState = {
         isPredefinedOpen: false,
         isCustomRangeOpen: true,
@@ -270,7 +274,7 @@ export default class Datepicker extends Litepicker {
     if (this.tabState && this.tabState.isCustomRangeOpen) {
       this.showCalendar(preDefinedDates, calendar);
       this.removeActiveState(datePickerLinks);
-      customDateTab.classList.add("active");
+      customDateTab.classList.add('active');
     } else {
       this.showPredefinedDates(preDefinedDates, calendar);
     }
@@ -282,7 +286,7 @@ export default class Datepicker extends Litepicker {
    */
   removeActiveState(datePickerLinks) {
     datePickerLinks.forEach((picker) => {
-      picker.classList.remove("active");
+      picker.classList.remove('active');
     });
   }
 
@@ -292,7 +296,7 @@ export default class Datepicker extends Litepicker {
    */
   hideAllPanels(panels) {
     panels.forEach((panel) => {
-      panel.classList.add("u-visually-hidden");
+      panel.classList.add('u-visually-hidden');
     });
   }
 
@@ -302,8 +306,8 @@ export default class Datepicker extends Litepicker {
    */
 
   closeOnEscape(picker) {
-    document.addEventListener("keydown", (event) => {
-      if (event.key === "Escape") {
+    document.addEventListener('keydown', (event) => {
+      if (event.key === 'Escape') {
         picker.hide();
       }
     });
@@ -314,16 +318,16 @@ export default class Datepicker extends Litepicker {
    * @param  {Event} event The event object
    */
   openOnIconClick(picker) {
-    document.addEventListener("click", (event) => {
-      if (!event.target.classList.contains("js-show-calendar")) return;
+    document.addEventListener('click', (event) => {
+      if (!event.target.classList.contains('js-show-calendar')) return;
       picker.show();
     });
   }
 
   start() {
     // Position the datepicker to the extreme right of the parent element
-    if (this.defaultOptions.position === "right") {
-      this.ui.classList.add("litepicker--right");
+    if (this.defaultOptions.position === 'right') {
+      this.ui.classList.add('litepicker--right');
     }
 
     // Close the datepicker if the user presses the 'Escape' key
@@ -336,15 +340,15 @@ export default class Datepicker extends Litepicker {
       this.openOnIconClick(this);
     }
 
-    this.on("show", (el) => {
-      this.options.parentEl.classList.add("input-backdrop");
+    this.on('show', (el) => {
+      this.options.parentEl.classList.add('input-backdrop');
       // If no element (el) exists when we click e.g. when the calendar icon is selected, we immediately bail
       // and return
       if (!el) return;
 
       // If we select the endDate element, allow the user to 'repick' the last date instead of setting two
       // dates again
-      if (el.classList.contains("datepicker-end")) {
+      if (el.classList.contains('datepicker-end')) {
         this.setOptions({
           allowRepick: true,
         });
@@ -352,15 +356,15 @@ export default class Datepicker extends Litepicker {
     });
 
     // When we hide the datepicker, set the initial state back to being able to pick two dates simultaneously
-    this.on("hide", () => {
-      this.options.parentEl.classList.remove("input-backdrop");
+    this.on('hide', () => {
+      this.options.parentEl.classList.remove('input-backdrop');
       this.setOptions({
         allowRepick: false,
       });
     });
 
     // Attach our sidebar of pre-defined dates to the ui of the original datepicker
-    this.on("render", (ui) => {
+    this.on('render', (ui) => {
       this.createDateRangeSidebar(ui);
     });
   }
