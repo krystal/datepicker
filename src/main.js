@@ -214,11 +214,14 @@ export default class Datepicker extends Litepicker {
             break;
         }
 
-        const startDate = picker
-          .getStartDate()
-          .dateInstance.toLocaleDateString();
-        const endDate = picker.getEndDate().dateInstance.toLocaleDateString();
-        this.emit('predefined:selected', timescale, startDate, endDate);
+        const startDate = this.getStartDate().dateInstance.toLocaleDateString();
+        const endDate = this.getEndDate().dateInstance.toLocaleDateString();
+        const dates = {
+          start: startDate,
+          end: endDate,
+          timescale,
+        };
+        this.emit('predefined:selected', dates);
 
         // Hide the datepicker after we select a pre-defined period
         this.hide();
